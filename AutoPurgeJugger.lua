@@ -1,3 +1,4 @@
+--Author: spiregor
 local AutoPurge = {}
 
 --AutoPurge.optionKey = Menu.AddKeyOption({"Hero Specific","Juggernaut"},"Combo Key",Enum.ButtonCode.KEY_D)
@@ -21,7 +22,7 @@ function AutoPurge.Combo()
 	if not hero then return end
 	
 	local Omnislash = NPC.GetAbility(myHero, "juggernaut_omni_slash")
-	
+			
 	local Cape = NPC.GetItem(hero, "item_glimmer_cape")
 	
 	local Diffus = NPC.GetItem(myHero, "item_diffusal_blade", true)
@@ -36,7 +37,8 @@ function AutoPurge.Combo()
 	(NPC.HasModifier(hero, "modifier_ghost_state") or 
 	NPC.HasModifier(hero, "modifier_eul_cyclone") or 
 	NPC.HasModifier(hero, "modifier_item_ethereal_blade_ethereal") or
-	--NPC.HasModifier(hero, "modifier_item_glimmer_cape")or
+	NPC.HasModifier(hero, "modifier_necrolyte_sadist_active")or
+	NPC.HasModifier(hero, "modifier_omninight_guardian_angel") or
 	NPC.HasModifier(hero, "modifier_pugna_decrepify") or
 	Ability.SecondsSinceLastUse(Cape)<=0.5 and Ability.SecondsSinceLastUse(Cape)>0.1) then
 	   
@@ -44,4 +46,4 @@ function AutoPurge.Combo()
 	   and Diffus and Ability.IsCastable(Diffus, 0) and NPC.IsEntityInRange(hero, myHero, Ability.GetCastRange(Diffus)) then Ability.CastTarget(Diffus, hero) return end
 	   end
 end
-return AutoPurge	   
+return AutoPurge	   	   
